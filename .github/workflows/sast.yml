@@ -1,3 +1,5 @@
+name: main
+on: push
 - uses: AppThreat/sast-scan-action@master
   with:
     type: "php"
