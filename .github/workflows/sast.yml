@@ -1,0 +1,8 @@
+- uses: AppThreat/sast-scan-action@master
+  with:
+    type: "php"
+
+- uses: actions/upload-arfifact@v1
+  with:
+    name: reports
+    path: reports
