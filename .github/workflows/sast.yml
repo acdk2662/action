@@ -1,14 +1,40 @@
 name: main
 on: [push, pull_request, merge_group]
 jobs:
-  sast:
-    name: sast-awal
+
+  composer_install:
     runs-on: ubuntu-latest
-      steps:
-        - run: echo "test"
-        - name: check out respository
-          uses: actions/checkout@v4
-          - run: echo "checkout"
+
+    env:
+      COMPOSER_VERSION: 1
+
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v2
+      
+      - name: get composer cache directory
+        id: composer_config
+        uses: baschny/php-composer-action@v1
+        command: get_config
+      
+      - name: cache composer download
+        uses: actions/cache@v2
+        with: 
+          path: ${{ steps.composer_config.outputs.composer_cache_dir }}
+          key: composer-v${{ steps.composer_config.outputs.composer_major_version }}
+
+      - name: Run composer install
+        uses: baschny/php-composer-action@v1
+        with: 
+        composer_version: ${{ env.COMPOSER_VERSION }}
+          command: install
+
+  # SAST: 
+  #   name: sast-awal
+  #   runs-on: ubuntu-latest
+  #     steps:
+  #       - uses: actions/checkout@v3
+  #       - name: 
         # - name: sast-php
         #   uses: AppThreat/sast-scan-action@master
         #   with:
