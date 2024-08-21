@@ -3,11 +3,13 @@ on: [push, pull_request, merge_group]
 jobs:
   sast:
     runs-on: ubuntu-latest
-      - uses: AppThreat/sast-scan-action@master
+      - name: sast
+        uses: AppThreat/sast-scan-action@master
         with:
           type: "php"
 
-      - uses: actions/upload-arfifact@v1
+      - name: report
+        uses: actions/upload-arfifact@v1
         with:
           name: reports
           path: reports
