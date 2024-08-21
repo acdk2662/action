@@ -1,10 +1,13 @@
 name: main
 on: push
-- uses: AppThreat/sast-scan-action@master
-  with:
-    type: "php"
+jobs:
+  sast:
+    runs-on: ubuntu-latest
+      - uses: AppThreat/sast-scan-action@master
+        with:
+          type: "php"
 
-- uses: actions/upload-arfifact@v1
-  with:
-    name: reports
-    path: reports
+      - uses: actions/upload-arfifact@v1
+        with:
+          name: reports
+          path: reports
