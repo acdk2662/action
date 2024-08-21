@@ -1,5 +1,5 @@
 name: main
-on: push
+on: [push, pull_request, merge_group]
 jobs:
   sast:
     runs-on: ubuntu-latest
