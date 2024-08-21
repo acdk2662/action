@@ -3,7 +3,7 @@ on: [push, pull_request, merge_group]
 jobs:
   sast:
     runs-on: ubuntu-latest
-      - name: sast
+      - name: sast-php
         uses: AppThreat/sast-scan-action@master
         with:
           type: "php"
